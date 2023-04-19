@@ -54,4 +54,16 @@ public class Orders {
     public List<LineItem> getLineItems() {
         return lineItems;
     }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "orderID=" + orderID +
+                ", userId='" + userId + '\'' +
+                ", lineItems=" + lineItems +
+                ", total=" + total +
+                ", orderStatus=" + orderStatus +
+                ", responseMessage='" + responseMessage + '\'' +
+                '}';
+    }
 }

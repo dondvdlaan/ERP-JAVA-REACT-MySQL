@@ -30,7 +30,7 @@ public class ShippingController {
         return shippingService.handleOrder(order);
     }
 
-    @GetMapping("/allShippings")
+    @GetMapping
     public List<Shipment> getAllShippings(){
 
         System.out.println("Route allShippings");

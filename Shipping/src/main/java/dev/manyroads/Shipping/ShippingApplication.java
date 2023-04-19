@@ -31,7 +31,7 @@ public class ShippingApplication {
 		return (args) -> {
 
 			// Fill up DB with test shipments
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 0; i++) {
 
 				LocalDate ld = LocalDate.now().plusDays(i);
 				String n = "name" + Integer.toString(i);

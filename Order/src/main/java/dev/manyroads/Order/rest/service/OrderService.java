@@ -23,6 +23,11 @@ public class OrderService {
     OrderRepository orderRepository;
 
     // Methods
+    /**
+     * Method to check inventory first on receipt of order. When ok, shipping is checked
+     * @param   newOrder    [Orders]    : new order received
+     * @return  savedOrder  [Orders]    : order saved with status code and if successful w shipping date
+     */
     public Orders createOrder(Orders newOrder) {
 
         // Variables
@@ -42,7 +47,6 @@ public class OrderService {
                     inventoryServiceUrl, newOrder, Orders.class);
 
             System.out.println("inventoryResponse " + inventoryResponse.toString());
-            System.out.println("inventoryResponse " + inventoryResponse.toString());
 
         }
         catch (Exception ex) {
@@ -51,25 +55,26 @@ public class OrderService {
             System.out.println("Inventory approach failed " + ex);
             success = false; }
 
-        // Check with Shipping-service
-        try {
-            shippingResponse = restTemplate.postForObject(
-                    shippingServiceUrl, newOrder, Orders.class);
+        // Check with Shipping-service if inventory was successful
+        if(success) {
+            try {
+                shippingResponse = restTemplate.postForObject(
+                        shippingServiceUrl, newOrder, Orders.class);
 
-            System.out.println("shippingResponse " + shippingResponse.toString());
-        }
-        catch (Exception ex) {
+                System.out.println("shippingResponse " + shippingResponse.toString());
+            } catch (Exception ex) {
 
-            System.out.println("shippingFailure " + ex);
+                System.out.println("shippingFailure " + ex);
 
-            // If Inventory request was not successful, reset success flag and inventory
-            success = false;
+                // If Inventory request was not successful, reset success flag and inventory
+                success = false;
 
-            // Compose request
-            HttpEntity<Orders> deleteRequest = new HttpEntity<>(newOrder);
+                // Compose request
+                HttpEntity<Orders> deleteRequest = new HttpEntity<>(newOrder);
 
-            ResponseEntity<Orders> deleteResponse = restTemplate.exchange(
-                    inventoryServiceUrl, HttpMethod.DELETE, deleteRequest, Orders.class);
+                ResponseEntity<Orders> deleteResponse = restTemplate.exchange(
+                        inventoryServiceUrl, HttpMethod.DELETE, deleteRequest, Orders.class);
+            }
         }
 
         if (success) {
@@ -79,7 +84,6 @@ public class OrderService {
             savedOrder.setOrderStatus(OrderStatus.FAILURE);
         }
         return orderRepository.save(savedOrder);
-
 
     }
 

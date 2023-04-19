@@ -5,6 +5,7 @@ import Inventory from "./inventory/Inventory";
 import Orders from "./orders/Orders";
 import { Dash } from "./Dash";
 import ProTip from "./ProTip";
+import Shipping from "./shipping/Shipping";
 
 export default function Routing(): ReactElement {
 
@@ -12,7 +13,7 @@ export default function Routing(): ReactElement {
       <Routes>
         <Route path="/inventory"  element={<Inventory />} />
         <Route path="/orders"     element={<Orders />} />
-        <Route path="/test"       element={<ProTip />} />
+        <Route path="/shipping"   element={<Shipping />} />
 
 
         <Route path="/home"       element={<Dash />} />

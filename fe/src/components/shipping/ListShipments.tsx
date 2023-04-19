@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Paper, styled } from "@mui/material";
 import { Order } from "../../types/Order";
+import { Shipment } from "../../types/Shipment";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -17,14 +18,14 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 interface Props{
-  orders: Order[],
+  shipments: Shipment[],
   onDelete: (id: string | undefined) => void,
   onCreate: () => void
 }
 /**
- * Component to list all products from Inventory
+ * Component to list all products from Shipping
  */
-export const ListOrders = (props: Props) => {
+export const ListShipments = (props: Props) => {
 
     return (
       <>
@@ -33,15 +34,15 @@ export const ListOrders = (props: Props) => {
         >
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h5" component="h4" align="center">
-              List Orders
+              List shipments
             </Typography>
             <Grid container spacing={2}>
-            {props.orders.map(o =>
+            {props.shipments.map(s =>
 
-              <Grid key={o.orderID} item xs={12} md={6}>
-                <Item>Id: {o.orderID} City: {o.shippingAddress.city} Status: {o.orderStatus}
+              <Grid key={s.shipmentID} item xs={12} md={6}>
+                <Item>Id: {s.shipmentID} City: {s.address.city} Date: {new Date(s.shippingDate).toLocaleDateString()}
                   <br /> 
-                  <Button onClick={()=>props.onDelete(o.orderID)} size="small">Delete</Button>
+                  <Button onClick={()=>props.onDelete(s.shipmentID)} size="small">Delete</Button>
                 </Item>
               </Grid>
             

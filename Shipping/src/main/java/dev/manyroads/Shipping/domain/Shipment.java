@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+/**
+ * Class Shipment indicates goods to be shipped with date and delivery address
+ */
 @Entity
 public class Shipment {
 

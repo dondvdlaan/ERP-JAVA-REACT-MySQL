@@ -54,7 +54,7 @@ public class ProductService {
         // Confirm successful stock checking
         confirmedOrder = order.setOrderStatus(OrderStatus.SUCCESS);
 
-        System.out.println(" confirmedOrder: " +  confirmedOrder);
+        System.out.println(" confirmedOrder: " +  confirmedOrder.toString());
 
         return confirmedOrder;
     }
@@ -67,13 +67,20 @@ public class ProductService {
      */
     @Transactional
     public Orders revertOrder(Orders order) {
-        
+
+
+
         order.getLineItems().forEach(l -> {
                     
             Product p = getProduct(l);
 
+            System.out.println("Product p before: " + p.toString());
+
             // Stock level is restored and saved
             p.setProdStock(p.getProdStock() + l.getProdQuantity());
+
+            System.out.println("Product p after: " + p.toString());
+
             productRepository.save(p);
         });
 
@@ -96,7 +103,6 @@ public class ProductService {
     }
 
     // Sub methods
-
     /**
      * Finds Product that belongs to each lineItem
      *

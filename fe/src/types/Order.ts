@@ -1,13 +1,8 @@
+import { Address } from "./Address"
+
 export interface LineItem{
     prodID: number,
     prodQuantity: number
-}
-export interface Address{
-    name: string,
-    house: string,
-    street: string,
-    city: string,
-    zip: string
 }
 
 export interface Order{

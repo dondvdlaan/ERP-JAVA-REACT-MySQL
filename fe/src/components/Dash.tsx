@@ -30,6 +30,11 @@ export const Dash = () => {
                       <Link to={`/orders`}>Orders</Link>                
                   </button>
                 </Typography>
+                <Typography gutterBottom variant="h5" component="h4" align="center">
+                  <button type="button">
+                      <Link to={`/shipping`}>Shipping</Link>                
+                  </button>
+                </Typography>
             </Grid>
           
           </Grid>

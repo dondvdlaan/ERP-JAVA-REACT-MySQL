@@ -32,7 +32,6 @@ public class Orders {
     private Long        total;
     // Hibernate will save lineItems while saving parent
     @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name="prodID")
     private List<LineItem> lineItems;
     private String      paymentMode;
     @OneToOne(cascade = CascadeType.ALL)
